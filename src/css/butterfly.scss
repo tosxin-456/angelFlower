@@ -1,0 +1,255 @@
+html,
+body {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 18px;
+  color: #000000;
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+//   background: hsl(200, 45%, 80%);
+}
+
+body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    height: 100%;
+    width: 120px;
+    background-image: url("https://assets.codepen.io/2273448/sacred-seed-tile-white-opaque.svg");
+    background-repeat: repeat;
+    background-position: center;
+    background-size: 4.5rem auto;
+    opacity: 0.4;
+  }
+}
+
+@viewport {
+  width: device-width;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+hr {
+  color: currentColor;
+  margin: 2rem 0;
+  border: 0;
+  border-bottom: 1px solid #fff;
+}
+
+.title {
+  position: relative;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 400;
+  font-family: 'Montserrat Alternates', sans-serif;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.6rem;
+  margin: 0 0 1rem;
+  font-weight: 400;
+}
+
+// animation stage
+.stage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  height: 100vh;
+  width: 100%;
+  max-width: 900px;
+  overflow-y: hidden;
+  z-index: 2;
+}
+
+// parent is for vertical flight
+.mariposa {
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  width: 200px;
+  height: 200px;
+  opacity: 0; /* start at 0 so they don't appear while loading */
+  -webkit-animation-fill-mode: backwards;
+  animation-fill-mode: backwards;
+  animation: fly 4s infinite linear;
+  animation-delay: .125s;
+  
+  // stagger flight
+  &:nth-child(2) {
+    animation-delay: 0.4s;
+    
+    // stagger turn
+    .mariposa-turn {
+      animation-delay: 0.75s;
+      
+      // stagger size and rotation
+      .mariposa-flutter {
+        transform: scale(0.7) rotateX(65deg);
+      }
+    }
+  }
+
+  // stagger flight
+  &:nth-child(3) {
+    animation-delay: 0.75s;
+   
+    // stagger turn
+    .mariposa-turn {
+      animation-delay: 1.25s;
+      
+      // stagger size and rotation
+      .mariposa-flutter {
+        transform: scale(0.3) rotateX(45deg);
+      }
+    }   
+  }
+  
+  // establishes perspective, animates rotation and horizontal movement
+  .mariposa-turn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 150px;
+    perspective: 1000px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    transform-origin: 50% 80%; /* turn from a natural center */
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    animation: turn 3s infinite cubic-bezier(.31,.09,.77,1.5);
+    transform-style: preserve-3d;
+    filter: drop-shadow(50px 30px 10px rgba(0, 0, 0, 0.5));
+  }
+}
+
+.mariposa-flutter {
+  width: 2rem;
+  height: 8rem;
+  position: relative;
+  top: 0;
+  margin: 0 auto;
+  background: url("https://assets.codepen.io/2273448/butterfly-body.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  transform-style: preserve-3d;
+  transform: rotateX(25deg) rotateY(5deg);
+  
+  // wings
+  &::before,
+  &::after {
+    position: absolute;
+    top: 5%;
+    margin: auto;
+    content: "";
+    height: 100%;
+    width: 250%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    transform-style: preserve-3d;
+    animation-delay: 0;
+  }
+  
+  &::before {
+    background-image: url("https://assets.codepen.io/2273448/butterfly-wing.png");
+    transform-origin: 0% 50%;
+    animation: flutter-r 0.3s infinite ease-out;
+    left: 55%;
+  }
+  
+  &::after {
+    background-image: url("https://assets.codepen.io/2273448/butterfly-wing-l.png");
+    transform-origin: 100% 50%;
+    animation: flutter-l 0.3s infinite ease-out;
+    right: 55%;
+  }
+}
+
+
+
+// wing flutter - right wing
+@keyframes flutter-r {
+  0%, 100% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(-40deg);
+  }
+}
+
+// wing flutter - left wing
+@keyframes flutter-l {
+  0%, 100% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(40deg);
+  }
+}
+
+
+// horizontal motion and rotation
+@keyframes turn {
+  0%, 100% {
+    transform: translateX(-20%) rotateZ(30deg);
+  }
+  25% {
+    transform: translateX(50%) rotateZ(-30deg);
+  }
+  50% {
+    transform: translateX(-80%) rotateZ(30deg);
+  }
+  75% {
+    transform: translateX(30%) rotateZ(-30deg);
+  }
+}
+
+
+// vertical flight motion
+@keyframes fly {
+  0% {
+    opacity: 0;
+    transform: translateY(70vh);
+  }
+  3%, 99% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-70vh);
+  }
+}

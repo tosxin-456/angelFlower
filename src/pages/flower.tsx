@@ -17,7 +17,7 @@ const Flower: React.FC = () => {
   };
 
   interface CustomCSSProperties extends React.CSSProperties {
-    '--d'?: string; // Define custom property
+    '--d'?: string; 
   }
 
   const growStyle: CustomCSSProperties = {
@@ -52,7 +52,7 @@ const growStyle5: CustomCSSProperties = {
     '--d':'4s'
   };
   const growStyle11: CustomCSSProperties = {
-       '--d':'4.2s'
+    '--d':'4.2s'
   };
   const growStyle12: CustomCSSProperties = {
     '--d':'4.4s'
@@ -68,8 +68,9 @@ const growStyle5: CustomCSSProperties = {
   };
 
   return (
-        
+    
     <div className="not-loaded" id='body'>
+      {/* <h1>Hello World</h1> */}
         <div className="night"></div>
         <div className="flowers">
           <div className="flower flower--1">
@@ -365,7 +366,6 @@ const growStyle5: CustomCSSProperties = {
               <div className="leaf leaf--3"></div>
             </div>
           </div>
-      
           <div className="long-g long-g--6">
             <div className="grow-ans" style={growStyle11}>
               <div className="leaf leaf--0"></div>

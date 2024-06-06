@@ -983,3 +983,6 @@ mask-image: linear-gradient(to top, transparent 40%, #074346 80%) !important;
 /* .not-loaded * {
   animation-play-state: paused !important;
 } */
+h1{
+  color:white;
+}
